@@ -1,3 +1,5 @@
+use dialoguer::Select;
+
 use std::io::{self, Write};
 
 // const PHWAR: [&str; 7] = ["Binga", "Marana", "Ah Htun", "Thike", "Razar", "Ahdipati", "Puti"];
@@ -14,6 +16,8 @@ fn main() {
     let birth_year = get_birth_year();
 
     println!("You were born in {birth_year}.\n");
+
+    get_weekday();
 
     calculate(birth_year);
 }
@@ -66,4 +70,19 @@ fn get_birth_year() -> u16 {
             _ => println!("Burmese birth year must be between 1200 and 1388. Please try again.\n")
         }
     }
+}
+
+fn get_weekday() -> u8 {
+    let weekdays = vec!["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    let day = Select::new()
+        .with_prompt("Select your birth weekday")
+        .items(&weekdays)
+        .default(0)
+        .interact()
+        .unwrap();
+
+    println!("You are {}-born.\n", weekdays[day]);
+
+    day as u8
 }
