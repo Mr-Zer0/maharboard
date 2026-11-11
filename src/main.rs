@@ -1,17 +1,37 @@
 use std::io::{self, Write};
 
+// const PHWAR: [&str; 7] = ["Binga", "Marana", "Ah Htun", "Thike", "Razar", "Ahdipati", "Puti"];
+
 fn main() {
     println!("*******************");
     println!("*    Mahaboard    *");
-    println!("*******************\n\n\n");
+    println!("*******************\n\n");
 
     let name = get_name();
 
-    println!("Mingalar par {name}!");
+    println!("Mingalar par {name}!\n");
 
     let birth_year = get_birth_year();
 
-    println!("You were born in {birth_year}.");
+    println!("You were born in {birth_year}.\n");
+
+    calculate(birth_year);
+}
+
+fn calculate(birth_year: u16) {
+    let remainder = birth_year % 7;
+
+    println!("Your remainder is: {remainder}");
+
+    let mut v = vec![1, 4, 0, 3, 6, 2, 5];
+
+    let index = v.iter().position(|&x| x == remainder).unwrap();
+
+    println!("The index: {index}");
+
+    v.rotate_left(index);
+
+    println!("The rotated vector: {:?}", v);
 }
 
 fn get_name () -> String {
@@ -43,7 +63,7 @@ fn get_birth_year() -> u16 {
             1200..=1388 => {
                 return year;
             },
-            _ => println!("Burmese birth year must be between 1200 and 1388. Please try again.")
+            _ => println!("Burmese birth year must be between 1200 and 1388. Please try again.\n")
         }
     }
 }
