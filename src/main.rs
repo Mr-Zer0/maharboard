@@ -2,7 +2,7 @@ use dialoguer::Select;
 
 use std::io::{self, Write};
 
-// const PHWAR: [&str; 7] = ["Binga", "Marana", "Ah Htun", "Thike", "Razar", "Ahdipati", "Puti"];
+const PHWAR: [&str; 7] = ["Binga", "Marana", "Ah Htun", "Thike", "Razar", "Ahdipati", "Puti"];
 
 fn main() {
     println!("*******************");
@@ -17,25 +17,24 @@ fn main() {
 
     println!("You were born in {birth_year}.\n");
 
-    get_weekday();
+    let birth_weekday = get_weekday();
 
-    calculate(birth_year);
+    calculate(birth_year, birth_weekday);
 }
 
-fn calculate(birth_year: u16) {
+fn calculate(birth_year: u16, birth_weekday: u8) {
     let remainder = birth_year % 7;
 
     println!("Your remainder is: {remainder}");
 
     let mut v = vec![1, 4, 0, 3, 6, 2, 5];
-
     let index = v.iter().position(|&x| x == remainder).unwrap();
-
-    println!("The index: {index}");
 
     v.rotate_left(index);
 
-    println!("The rotated vector: {:?}", v);
+    let index = v.iter().position(|&x| x == birth_weekday as u16).unwrap();
+
+    println!("Your Mahaboard sign is: {}", PHWAR[index]);
 }
 
 fn get_name () -> String {
@@ -73,7 +72,7 @@ fn get_birth_year() -> u16 {
 }
 
 fn get_weekday() -> u8 {
-    let weekdays = vec!["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let weekdays = vec!["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
     let day = Select::new()
         .with_prompt("Select your birth weekday")
