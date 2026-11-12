@@ -5,9 +5,9 @@ use std::io::{self, Write};
 const PHWAR: [&str; 7] = ["Binga", "Marana", "Ah Htun", "Thike", "Razar", "Ahdipati", "Puti"];
 
 fn main() {
-    println!("*******************");
-    println!("*    Mahaboard    *");
-    println!("*******************\n\n");
+    println!("********************");
+    println!("*    Maharboard    *");
+    println!("********************\n\n");
 
     let name = get_name();
 
@@ -22,6 +22,7 @@ fn main() {
     calculate(birth_year, birth_weekday);
 }
 
+/// Calculate the Mahaboard sign based on the Burmese birth year and weekday
 fn calculate(birth_year: u16, birth_weekday: u8) {
     let remainder = birth_year % 7;
 
@@ -37,6 +38,7 @@ fn calculate(birth_year: u16, birth_weekday: u8) {
     println!("Your Mahaboard sign is: {}", PHWAR[index]);
 }
 
+/// Get the user's name just for greeting purposes
 fn get_name () -> String {
     print!("Let me know your name: ");
     io::stdout().flush().expect("Failed to flush stdout");
@@ -46,6 +48,7 @@ fn get_name () -> String {
     name.trim().to_string()
 }
 
+/// Get the Burmese birth year from the user
 fn get_birth_year() -> u16 {
     loop {
         print!("Please, enter your Burmese birth year: ");
@@ -71,6 +74,9 @@ fn get_birth_year() -> u16 {
     }
 }
 
+/// Get the day of week the user was born on
+/// Saturday = 0, Sunday = 1, Monday = 2, Tuesday = 3, Wednesday = 4, Thursday = 5, Friday = 6
+/// Starting from Saturday is to align with Burmese calendar and remainder as index
 fn get_weekday() -> u8 {
     let weekdays = vec!["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
