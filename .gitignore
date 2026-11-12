@@ -1,1 +1,14 @@
 /target
+
+# macOS Finder files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+.Spotlight-V100
+.Trashes
+
+# Temporary files
+*.icloud
