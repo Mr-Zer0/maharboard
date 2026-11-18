@@ -7,9 +7,14 @@ any help from AI or auto-completion. This program calculates
 one's maharboard (မဟာဘုတ်) sign which is Myanmar's basic astrological
 sign based on date of birth.
 
+The maharboard sign can be calculated for both Burmese date and 
+Gregoiran date. Each date is implement as separate module.
+
 ## Techstack
 - rust
 - cargo
 
 ### Dependency
 - dialoguer
+- regex
+- chrono
