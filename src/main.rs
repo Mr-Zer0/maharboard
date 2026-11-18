@@ -1,6 +1,9 @@
+use dialoguer::Select;
+
 use std::io::{self, Write};
 
 pub mod burmese;
+pub mod gregorian;
 
 fn main() {
     println!("********************");
@@ -11,7 +14,20 @@ fn main() {
 
     println!("Mingalar par {name}!\n");
 
-    burmese::new();
+    let calendar_types = vec!["Burmese", "Gregorian"];
+
+    let calendar = Select::new()
+        .with_prompt("Which calendar do you prefer?")
+        .items(&calendar_types)
+        .default(0)
+        .interact()
+        .unwrap();
+
+    if calendar == 0 {
+        burmese::new();
+    } else {
+        gregorian::new();
+    }
 }
 
 /// Get the user's name just for greeting purposes
